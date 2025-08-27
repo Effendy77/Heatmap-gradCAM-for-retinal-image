@@ -3,7 +3,7 @@
 **Continuity with Supplementary Doc S7.** This appendix operationalizes a scripted, cohort-stratified pipeline (primary & secondary) with threshold-aware selection and provenance for exact reproducibility.
 
 ## Workflow
-erify_inputs.py → select_cases.py → generate_gradcam.py → compose_panels.py → provenance_log.py
+erify_inputs.py -> select_cases.py -> generate_gradcam.py -> compose_panels.py -> provenance_log.py
 
 - **verify_inputs.py** — checks files/columns and left-eye pattern.
 - **select_cases.py** — creates strata; labels TP/FP/FN/TN at chosen threshold; picks top-k closest to threshold.
@@ -25,7 +25,7 @@ python compose_panels.py --root cams/ --out panels/ --cols 6
 python provenance_log.py --config configs/hybrid.yaml --panels_dir panels/ --out provenance.json
 Environment
 
-torch≥2.0.0, torchvision≥0.15.1, timm≥0.9.16, pytorch-grad-cam≥1.4.8, opencv-python-headless≥4.10, pandas≥2.2, numpy≥1.26.
+torch>=2.0.0, torchvision>=0.15.1, timm>=0.9.16, pytorch-grad-cam>=1.4.8, opencv-python-headless>=4.10, pandas>=2.2, numpy>=1.26.
 
 Colour Map & Artefacts
 
