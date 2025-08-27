@@ -35,6 +35,7 @@ Red = high attention; Blue = low. A vertical colour bar (0–1) is rendered alon
 Selection & Reporting
 
 Default topk_per_outcome = 12 per stratum. State and justify the decision threshold (e.g., Youden 0.345 vs 0.5). Cite the code artifact (e.g., branch hybrid-final, tag v1.0-hybrid).
+```
 
 (That fixes the code-fence so “Environment / Colour Map / Selection” render correctly.)
 
@@ -43,6 +44,8 @@ Default topk_per_outcome = 12 per stratum. State and justify the decision thresh
 2. Name it: `configs/hybrid.yaml`.  
 3. Paste this starter config (fill the `/path/to/...` later if you want; you can commit now):
 
+
+```yaml
 experiment_name: HYBRID-GradCAM-AppendixE
 device: cuda
 
@@ -60,47 +63,49 @@ threshold: 0.345
 topk_per_outcome: 12
 
 preprocess:
-enable: false
+  enable: false
 
 visuals:
-add_colorbar: true
+  add_colorbar: true
 
 images_dir:
-primary: /path/to/left_images_primary
-secondary: /path/to/left_images_secondary
+  primary: /path/to/left_images_primary
+  secondary: /path/to/left_images_secondary
 
 checkpoints:
-primary: /path/to/fold0_primary_checkpoint.pth
-secondary: /path/to/fold0_secondary_checkpoint.pth
+  primary: /path/to/fold0_primary_checkpoint.pth
+  secondary: /path/to/fold0_secondary_checkpoint.pth
 
 predictions_csv:
-primary: /path/to/primary_predictions.csv
-secondary: /path/to/secondary_predictions.csv
+  primary: /path/to/primary_predictions.csv
+  secondary: /path/to/secondary_predictions.csv
 
 stratifications:
-primary:
-- by: [sex, age_bin]
-bins:
-- {label: lt50, min: 0, max: 50}
-- {label: 50to60, min: 50, max: 60}
-- {label: ge60, min: 60, max: 120}
-secondary:
-- by: [sex, age_bin, diabetes_prevalent, hypertension_prevalent]
-bins:
-- {label: lt50, min: 0, max: 50}
-- {label: 50to60, min: 50, max: 60}
-- {label: ge60, min: 60, max: 120}
-
+  primary:
+    - by: [sex, age_bin]
+      bins:
+        - {label: lt50, min: 0, max: 50}
+        - {label: 50to60, min: 50, max: 60}
+        - {label: ge60, min: 60, max: 120}
+  secondary:
+    - by: [sex, age_bin, diabetes_prevalent, hypertension_prevalent]
+      bins:
+        - {label: lt50, min: 0, max: 50}
+        - {label: 50to60, min: 50, max: 60}
+        - {label: ge60, min: 60, max: 120}
+```
 
 # 3) (Optional) Add the flowchart image
 - In `docs/appendix/`, click **Add file → Upload files**, and upload `AppendixE_Flowchart.png`.  
 - Then add this line somewhere in `Appendix_E.md`:
-
+  ```
+  ![Grad-CAM pipeline](AppendixE_Flowchart.png)
+  ```
 
 # 4) Tidy the old scripts (optional but recommended)
 To avoid confusing reviewers, move the older 3-step scripts into a folder named `legacy/` right in the GitHub UI:
 - Open each file (`step_1_preprocess_input.py`, `step_2_run_gradcam.py`, `step_3_analyse_output.py`) → ✏️ edit → above the filename, change the path to `legacy/step_1_preprocess_input.py` (etc.) → **Commit changes**.  
-This keeps history, but clearly separates the old approach. :contentReference[oaicite:3]{index=3}
+This keeps history, but clearly separates the old approach.
 
 # 5) Cut a citable release (UI only)
 - Go to **Releases** → **Draft a new release**.  
@@ -114,5 +119,3 @@ This keeps history, but clearly separates the old approach. :contentReference[oa
 ---
 
 If you do just #1 and #2, your Appendix will render perfectly and the repo will be reproducible from the UI alone. Want me to review the `hybrid_gradcam/gradcam_utils.py` on the branch and confirm the **colour bar code** is present? I can check and point to the exact lines next.
-::contentReference[oaicite:4]{index=4}
-
