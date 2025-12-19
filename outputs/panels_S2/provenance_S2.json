@@ -1,0 +1,21 @@
+{
+  "timestamp": 1766157693.9777505,
+  "experiment_name": "HYBRID-GRADCAM",
+  "checkpoints": {
+    "primary": "87c4d67fa912bfbdde600045757b8ea4db4ac563a4957bb21d7cb98daf675d95",
+    "secondary": "9eff5bfe7a358e9c7940ebd18d99f8050d7e2ed464c85c4c26499a5c4586f668"
+  },
+  "predictions_csv": {
+    "primary": "431dad86440d2f3d330bff97f896c90fa31788b85151e7eafa03e1369385662e",
+    "secondary": "960e96b78943de915193c68dfc6d7fa5d23f48bd4bb2b4196151af8e1b58ed3b"
+  },
+  "device": "cuda:0",
+  "backbone": "vit",
+  "target_layer": "blocks.-1.norm1",
+  "threshold": 0.345,
+  "panels": {
+    "..\\panels_S2\\secondary__50-59_0_1__panel.png": "17f264731131bba5303ee7e8ff40be3eace1f10afdfeed297a0dabafbded9df6",
+    "..\\panels_S2\\secondary__50-59_1_0__panel.png": "7be6c83670afb85b97f67c9a0e1c33bfdea8c768ac76c4c669098edc5c8c2dbc",
+    "..\\panels_S2\\secondary__50-59_1_1__panel.png": "1bf7faec61ba4bbe0a90956a0322012d5179c66cabdd7575ab36534ddf153abb"
+  }
+}

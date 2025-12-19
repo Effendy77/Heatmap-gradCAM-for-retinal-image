@@ -1,0 +1,59 @@
+experiment_name: HYBRID-GRADCAM
+device: cuda:0
+probability_column: DL_raw_prob
+threshold: 0.345
+topk_per_outcome: 6
+selection_strategy: margin
+left_eye_pattern: "21015"
+cam:
+  method: gradcam        # gradcam, gradcam++, scorecam, etc.
+  target: auto           # auto|pos|<int>; for your 1-logit head "pos" -> index 0
+  batch_size: 32         # optional
+  save_images: true      # save gradcam images to disk
+  save_csv: true         # save gradcam results to csv
+  save_dir: "D:/EXPERIMENT/gradCAM/Hybrid/GRADCAM_results"  # directory to save results
+
+predictions_csv:
+  primary: "D:/EXPERIMENT/gradCAM/Hybrid/PRIMARY/PRIMARY comparison_all_models.csv"
+  secondary: "D:/EXPERIMENT/gradCAM/Hybrid/SECONDARY/SECONDARY cohort_merged_for_stratified_analysis.csv"
+
+checkpoints:
+  primary: "D:/EXPERIMENT/gradCAM/Hybrid/PRIMARY/checkpoint-fold0.pth"
+  secondary: "D:/EXPERIMENT/gradCAM/Hybrid/SECONDARY/checkpoint-fold0.pth"
+
+images_dir:
+  primary: "D:/EXPERIMENT/gradCAM/Hybrid/PRIMARY/left_fundus_images"
+  secondary: D:/EXPERIMENT/gradCAM/Hybrid/SECONDARY/left_fundus_images
+
+backbone: vit
+target_layer: blocks.-1.norm1
+image_size: 224
+normalize_mean: [0.485, 0.456, 0.406]
+normalize_std:  [0.229, 0.224, 0.225]
+
+preprocess:
+  enable: false          # keep original images; set true for circular crop + white bg
+
+visuals:
+  add_colorbar: true     # add a vertical red→blue colorbar to overlays
+  
+threshold: 0.345
+topk_per_outcome: 6
+
+stratifications:
+  primary:
+    - by: [age_bin]
+      bins:
+        - {label: "lt50",   min: 0,  max: 50}
+        - {label: "50-59", min: 50, max: 60}
+        - {label: "60-69", min: 60, max: 70}
+        - {label: "70plus",   min: 70, max: 200}
+
+  secondary:
+    - by: [age_bin, diabetes_prevalent, hypertension_prevalent]
+      bins:
+        - {label: "lt50",   min: 0,  max: 50}
+        - {label: "50-59", min: 50, max: 60}
+        - {label: "60-69", min: 60, max: 70}
+        - {label: "70plus",   min: 70, max: 200}
+
